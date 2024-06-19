@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Services\AgifyService;
@@ -20,7 +20,7 @@ class AgifyServiceTest extends TestCase
     {
         // Mock the HTTP response
         Http::fake([
-            'https://api.agify.io*' => Http::response([
+            config('services.agify.url') . '*' => Http::response([
                 'name' => 'John',
                 'age' => 30,
                 'count' => 1000,
@@ -44,17 +44,16 @@ class AgifyServiceTest extends TestCase
 
     public function test_get_age_by_name_handles_errors()
     {
-    // Mock the HTTP response for an error
-    Http::fake([
-        'https://api.agify.io*' => Http::response(null, 500)
-    ]);
+        // Mock the HTTP response for an error
+        Http::fake([
+            config('services.agify.url') . '*' => Http::response(null, 500)
+        ]);
 
-    // Call the service method
-    $response = $this->agifyService->getAgeByName('John');
+        // Call the service method
+        $response = $this->agifyService->getAgeByName('John');
 
-    // Assert the response is empty or handles the error appropriately
-    $this->assertNull($response);
+        // Assert the response is empty or handles the error appropriately
+        // Note: Modify this assertion based on how your service handles errors
+        $this->assertNull($response);
     }
-
 }
-
