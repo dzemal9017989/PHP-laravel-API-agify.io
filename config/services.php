@@ -32,8 +32,8 @@ return [
     ],
 
     'agify' => [
-    'url' => env('AGIFY_URL', 'https://api.agify.io'),
-],
+        'url' => env('AGIFY_API_URL', 'https://api.agify.io'),
+    ],
 
 
 ];
